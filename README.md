@@ -29,3 +29,9 @@ postgres:15
 - Untuk mengubah konfigurasi DataSource, kita cukup menggunakan application properties saja 
 - Kita bisa lihat semua konfigurasinya dengan prefix spring.datasource.*
 - https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.data 
+
+## Konfigurasi JPA
+- Untuk melakukan konfigurasi JPA, kita juga tidak perlu melakukannya secara manual lagi di file persistance.xml
+- Secara otomatis JPA akan menggunakan DataSource di Spring, dan jika kita butuh mengubah konfigurasi, kita bisa menggunakan properties dengan prefix spring.jpa.*
+- https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+
