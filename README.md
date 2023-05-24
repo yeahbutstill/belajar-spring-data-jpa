@@ -35,3 +35,22 @@ postgres:15
 - Secara otomatis JPA akan menggunakan DataSource di Spring, dan jika kita butuh mengubah konfigurasi, kita bisa menggunakan properties dengan prefix spring.jpa.*
 - https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
 
+## Entity Manager Factory
+- Selain DataSource, Spring Boot juga secara otomatis membuatkan bean EntityMangerFactory, sehingga kita tidak perlu membuatnya secara manual 
+- Itu semua secara otomatis dibuat oleh Spring Boot
+- https://github.com/spring-projects/spring-boot/blob/main/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaAutoConfiguration.java
+
+## Tanpa Entity Manager
+- Saat kita menggunakan Spring Data JPA, kita akan jarang sekali membuat Entity Manager lagi 
+- Bahkan mungkin jarang menggunakan Entity Manager Factory 
+- Spring Data membawa konsep Repository (diambil dari buku Domain Driven Design)
+- Dimana Repository merupakan layer yang digunakan untuk mengelola data (contohnya di database)
+
+## Repository
+- Setiap Entity yang kita buat di JPA, maka kita biasanya akan buatkan Repository nya 
+- Repository berbentuk Interface, yang secara otomatis diimplementasikan oleh Spring menggunakan AOP 
+- Untuk membuat Repository, kita cukup membuat interface turunan dari JPARepository<T, ID>
+- https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html
+- Dan kita juga bisa tambahkan annotation @Repository (walaupun tidak wajib)
+- https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Repository.html 
+
