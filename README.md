@@ -93,3 +93,16 @@ postgres:15
 - Kita bisa menggunakan Platform Transaction Manager yang sudah disediakan oleh Spring
 - https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/PlatformTransactionManager.html
 - Penggunaan ini sangat manual, sehingga kita bisa atur semuanya secara manual
+
+## Query Method
+- Saat kita menggunakan EntityManager, kita bisa membuat query menggunakan JPA QL, namun bagaimana jika menggunakan Repository?
+- Spring Data menyediakan fitur Query Method, yaitu membuat query menggunakan nama method secara otomatis
+- Spring Data akan melakukan penerjemahan secara otomatis dari nama method menjadi JPA QL
+
+## Format Query Method
+- Untuk melakukan query yang mengembalikan data lebih dari satu, kita bisa gunakan prefix findAll...
+- Untuk melakukan query yang mengembalikan data pertama, kita bisa gunakan prefix findFirst...
+- Selanjutnya diikuti dengan kata By dan diikuti dengan operator query nya
+- Untuk operator query yang didukung, kita bisa lihat di halaman ini
+- https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation 
+
