@@ -54,3 +54,9 @@ postgres:15
 - Dan kita juga bisa tambahkan annotation @Repository (walaupun tidak wajib)
 - https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/stereotype/Repository.html 
 
+## Crud Repository
+- JpaRepository adalah turunan dari interface CrudRepository dan ListCrudRepository, dimana di interface tersebut banyak method yang bisa digunakan untuk melakukan operasi CRUD 
+- Kita tidak perlu lagi menggunakan Entity Manager untuk melakukan operasi CRUD, cukup gunakan JpaRepository 
+- Ada yang perlu diperhatikan di JpaRepository, method untuk CREATE dan UPDATE digabung dalam satu method save(), yang artinya method save() adalah CREATE or UPDATE
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/ListCrudRepository.html 
