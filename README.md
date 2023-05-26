@@ -177,3 +177,8 @@ postgres:15
 - Query Annotation juga bisa digunakan untuk membuat JPA QL atau Native Query untuk perintah Update atau Delete, caranya kita perlu menambahkan annotation @Modifying untuk memberitahu bahwa ini bukan Query Select
 - https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Modifying.html 
 
+## Stream
+- Saat kita menggunakan List<T> dan Query Method findAll..., maka secara otomatis seluruh data hasil dari database akan di load ke memory
+- Pada kasus data yang sangat banyak, hal ini sangat berbahaya karena bisa terjadi error OutOfMemory
+- Spring Data JPA bisa menggunakan fitur database cursor, untuk mengambil data sedikit demi sedikit ketika diperlukan menggunakan Java Stream
+- Kita bisa membuat Query Method dengan prefix streamAll... dan return value Stream<T>

@@ -12,9 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.support.TransactionOperations;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ProductRepositoryTest {
@@ -198,6 +198,19 @@ class ProductRepositoryTest {
             Product product = productRepository.findById(13L).orElse(null);
             assertNotNull(product);
             assertEquals(0, product.getPrice());
+        });
+    }
+
+    @Test
+    void testStream() {
+        transactionOperations.executeWithoutResult(transactionStatus -> {
+            Category category = categoryRepository.findById(1L).orElse(null);
+            assertNotNull(category);
+
+            Stream<Product> products = productRepository.streamAllByCategory(category);
+            products.forEach(product -> {
+                System.out.println(product.getId() + " : " + product.getName());
+            });
         });
     }
 
