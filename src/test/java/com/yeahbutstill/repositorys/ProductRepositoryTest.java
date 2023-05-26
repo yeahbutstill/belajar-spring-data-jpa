@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.support.TransactionOperations;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ class ProductRepositoryTest {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private TransactionOperations transactionOperations;
 
     @Test
     void testCreateProduct() {
@@ -110,6 +114,27 @@ class ProductRepositoryTest {
         // test not exists
         exists = productRepository.existsByName("Apple Iphone 15 Pro Max");
         assertEquals(false, exists);
+    }
+
+    @Test
+    void testDeleteByName() {
+        transactionOperations.executeWithoutResult(transactionStatus -> {
+            Category category = categoryRepository.findById(1L).orElse(null);
+            assertNotNull(category);
+
+            Product product = new Product();
+            product.setName("Samsung Galaxy S9");
+            product.setPrice(16_000_000L);
+            product.setCategory(category);
+            productRepository.save(product);
+
+            Integer samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            assertEquals(1, samsungGalaxyS9);
+
+            // test not exists
+            samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            assertEquals(0, samsungGalaxyS9);
+        });
     }
 
 }

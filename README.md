@@ -138,3 +138,9 @@ postgres:15
 - Method ini sebenarnya sederhana, return value nya adalah boolean, untuk mengecek apakah ada data sesuai dengan Query Method atau tidak 
 - Untuk membuatnya kita bisa gunakan prefix existsBy…
 
+## Delete Query Method
+- Kita juga bisa membuat delete Query Method dengan prefix deleteBy 
+- Untuk delete, kita bisa return int sebagai penanda jumlah record yang berhasil di hapus
+- Untuk membuat delete query method, kita bisa gunakan prefix deleteBy…
+
+
