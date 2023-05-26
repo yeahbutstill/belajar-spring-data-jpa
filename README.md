@@ -149,3 +149,12 @@ postgres:15
 - Class SimpleJpaRepository terdapat annontatio @Transactional(readOnly=true), oleh karena itu saat kita buat Query Method di Repository, maka secara default akan menjalankan transaction read only
 - https://docs.spring.io/spring-data/data-jpa/docs/current/api/org/springframework/data/jpa/repository/support/SimpleJpaRepository.html 
 
+## Named Query
+- Saat kita menggunakan JPA, kita sering sekali menggunakan Named Query 
+- Lantas bagaimana jika kita menggunakan Spring Data JPA Repository? 
+- Untuk menggunakan Named Query di Repository, kita cukup buat nama method sesuai degan nama Named Query, misal jika kita memiliki Named Query dengan nama Product.searchProductUsingName, maka kita bisa membuat method ProductRepository.searchProductUsingName()
+- Secara otomatis itu akan menggunakan Named Query tersebut
+
+## Sorting dan Paging
+- Named Query di Repository tidak mendukung Sort
+- Namun mendukung Pageable (tanpa Sort), oleh karena itu kita harus menambahkan Sorting secara manual di Named Query nya

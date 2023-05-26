@@ -156,4 +156,16 @@ class ProductRepositoryTest {
             assertEquals(0, samsungGalaxyS9); // transaksi 3
     }
 
+    @Test
+    void setProduct() {
+        Pageable pageable = PageRequest.of(0, 8);
+        List<Product> products = productRepository.searchProductUsingName("Apple Iphone 14 Pro Max", pageable);
+        assertEquals(5, products.size());
+        assertEquals("Apple Iphone 14 Pro Max", products.get(0).getName());
+        assertEquals("Apple Iphone 14 Pro Max", products.get(1).getName());
+        assertEquals("Apple Iphone 14 Pro Max", products.get(2).getName());
+        assertEquals("Apple Iphone 14 Pro Max", products.get(3).getName());
+        assertEquals("Apple Iphone 14 Pro Max", products.get(4).getName());
+    }
+
 }

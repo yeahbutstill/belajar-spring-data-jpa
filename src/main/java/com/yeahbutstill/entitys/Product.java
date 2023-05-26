@@ -17,6 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
+@NamedQuery(name = "Product.searchProductUsingName", query = "SELECT p FROM Product p WHERE p.name = :name")
 public class Product {
 
     @Id
