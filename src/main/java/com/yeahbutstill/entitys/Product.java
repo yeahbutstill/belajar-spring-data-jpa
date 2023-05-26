@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -27,9 +28,9 @@ public class Product {
     private String name;
 
     @NotNull
+    @PositiveOrZero
     private Long price;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "categories_id", referencedColumnName = "id")
     private Category category;

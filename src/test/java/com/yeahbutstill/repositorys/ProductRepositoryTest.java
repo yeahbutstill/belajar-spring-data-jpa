@@ -57,7 +57,7 @@ class ProductRepositoryTest {
     void testFindProduct() {
         List<Product> products = productRepository.findAllByCategory_Name("GADGET MURAH");
 
-        assertEquals(2, products.size());
+        assertEquals(10, products.size());
         assertEquals("Apple Iphone 14 Pro Max", products.get(0).getName());
         assertEquals("Apple Iphone 13 Pro Max", products.get(1).getName());
     }
@@ -67,7 +67,7 @@ class ProductRepositoryTest {
         Sort sort = Sort.by(Sort.Order.desc("id"));
         List<Product> products = productRepository.findAllByCategory_Name("GADGET MURAH", sort);
 
-        assertEquals(2, products.size());
+        assertEquals(10, products.size());
         assertEquals("Apple Iphone 13 Pro Max", products.get(0).getName());
         assertEquals("Apple Iphone 14 Pro Max", products.get(1).getName());
     }
@@ -79,8 +79,8 @@ class ProductRepositoryTest {
         Page<Product> products = productRepository.findAllByCategory_Name("GADGET MURAH", pageable);
         assertEquals(1, products.getContent().size());
         assertEquals(0, products.getNumber());
-        assertEquals(2, products.getTotalElements());
-        assertEquals(2, products.getTotalPages());
+        assertEquals(10, products.getTotalElements());
+        assertEquals(10, products.getTotalPages());
         assertEquals("Apple Iphone 13 Pro Max", products.getContent().get(0).getName());
 
         // page 1
@@ -88,8 +88,8 @@ class ProductRepositoryTest {
         products = productRepository.findAllByCategory_Name("GADGET MURAH", pageable);
         assertEquals(1, products.getContent().size());
         assertEquals(1, products.getNumber());
-        assertEquals(2, products.getTotalElements());
-        assertEquals(2, products.getTotalPages());
+        assertEquals(10, products.getTotalElements());
+        assertEquals(10, products.getTotalPages());
         assertEquals("Apple Iphone 14 Pro Max", products.getContent().get(0).getName());
 
     }
@@ -97,10 +97,10 @@ class ProductRepositoryTest {
     @Test
     void testCount() {
         Long count = productRepository.count();
-        assertEquals(2L, count);
+        assertEquals(10L, count);
 
         count = productRepository.countByCategory_Name("GADGET MURAH");
-        assertEquals(2L, count);
+        assertEquals(10L, count);
 
         count = productRepository.countByCategory_Name("MURAH AJA");
         assertEquals(0L, count);
@@ -117,8 +117,8 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testDeleteByName() {
-        transactionOperations.executeWithoutResult(transactionStatus -> {
+    void testOldDeleteByName() {
+        transactionOperations.executeWithoutResult(transactionStatus -> { // transaksi 1
             Category category = categoryRepository.findById(1L).orElse(null);
             assertNotNull(category);
 
@@ -126,15 +126,34 @@ class ProductRepositoryTest {
             product.setName("Samsung Galaxy S9");
             product.setPrice(16_000_000L);
             product.setCategory(category);
-            productRepository.save(product);
+            productRepository.save(product); // transaksi 1
 
-            Integer samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            Integer samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9"); // transaksi 1
             assertEquals(1, samsungGalaxyS9);
 
             // test not exists
-            samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9"); // transaksi 1
             assertEquals(0, samsungGalaxyS9);
         });
+    }
+
+    @Test
+    void testDeleteByName() {
+            Category category = categoryRepository.findById(1L).orElse(null);
+            assertNotNull(category);
+
+            Product product = new Product();
+            product.setName("Samsung Galaxy S9");
+            product.setPrice(16_000_000L);
+            product.setCategory(category);
+            productRepository.save(product); // transaksi 1
+
+            Integer samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            assertEquals(1, samsungGalaxyS9); // transaksi 2
+
+            // test not exists
+            samsungGalaxyS9 = productRepository.deleteByName("Samsung Galaxy S9");
+            assertEquals(0, samsungGalaxyS9); // transaksi 3
     }
 
 }

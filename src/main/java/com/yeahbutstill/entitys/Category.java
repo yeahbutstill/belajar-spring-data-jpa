@@ -3,7 +3,6 @@ package com.yeahbutstill.entitys;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -27,7 +26,6 @@ public class Category {
     @NotEmpty
     private String name;
 
-    @NotNull
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 

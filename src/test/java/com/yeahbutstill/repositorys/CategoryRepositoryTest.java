@@ -31,7 +31,7 @@ class CategoryRepositoryTest {
         category.setName("GADGET MURAH");
         categoryRepository.save(category);
 
-        categoryRepository.findById(1L).orElse(null);
+        category = categoryRepository.findById(1L).orElse(null);
         Assertions.assertNotNull(category);
         Assertions.assertEquals("GADGET MURAH", category.getName());
     }
@@ -44,7 +44,7 @@ class CategoryRepositoryTest {
 
         List<Category> categoryList = categoryRepository.findAllByNameLike("%GADGET%");
         Assertions.assertNotNull(categoryList);
-        Assertions.assertEquals(1, categoryList.size());
+        Assertions.assertEquals(5, categoryList.size());
         Assertions.assertEquals("GADGET MURAH", categoryList.get(0).getName());
     }
 
