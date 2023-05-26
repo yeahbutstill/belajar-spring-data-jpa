@@ -173,4 +173,7 @@ postgres:15
 - Pada kasus jika kita ingin return dari Query Method nya adalah Page<T>, bukan List<T>, maka kita harus memberitahu Spring Data JPA bagaimana cara melakukan count query nya
 - Kita bisa tambahkan query count nya pada attribute countQuery di Query Annotation
 
+## Modifying
+- Query Annotation juga bisa digunakan untuk membuat JPA QL atau Native Query untuk perintah Update atau Delete, caranya kita perlu menambahkan annotation @Modifying untuk memberitahu bahwa ini bukan Query Select
+- https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Modifying.html 
 

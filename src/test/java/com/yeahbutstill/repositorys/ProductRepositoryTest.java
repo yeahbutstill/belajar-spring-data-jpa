@@ -186,4 +186,19 @@ class ProductRepositoryTest {
         assertEquals("Apple Iphone 13 Pro Max", products.getContent().get(0).getName());
     }
 
+    @Test
+    void testModifying() {
+        transactionOperations.executeWithoutResult(transactionStatus -> {
+            Integer total = productRepository.deleteProductUsingName("Wrong");
+            assertEquals(0, total);
+
+            total = productRepository.updateProductPriceToZero(13L);
+            assertEquals(1, total);
+
+            Product product = productRepository.findById(13L).orElse(null);
+            assertNotNull(product);
+            assertEquals(0, product.getPrice());
+        });
+    }
+
 }
