@@ -102,4 +102,14 @@ class ProductRepositoryTest {
         assertEquals(0L, count);
     }
 
+    @Test
+    void testExistsByName() {
+        Boolean exists = productRepository.existsByName("Apple Iphone 14 Pro Max");
+        assertEquals(true, exists);
+
+        // test not exists
+        exists = productRepository.existsByName("Apple Iphone 15 Pro Max");
+        assertEquals(false, exists);
+    }
+
 }
