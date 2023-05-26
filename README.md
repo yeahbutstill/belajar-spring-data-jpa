@@ -182,3 +182,8 @@ postgres:15
 - Pada kasus data yang sangat banyak, hal ini sangat berbahaya karena bisa terjadi error OutOfMemory
 - Spring Data JPA bisa menggunakan fitur database cursor, untuk mengambil data sedikit demi sedikit ketika diperlukan menggunakan Java Stream
 - Kita bisa membuat Query Method dengan prefix streamAll... dan return value Stream<T>
+
+## Slice
+- Saat kita mengembalikan data dalam bentuk Page<T>, maka kita hanya akan dapat data untuk nomor page yang dipilih
+- Kita bisa menggunakan Slice<T>, yang bisa mengembalikan informasi apakah ada next page dan previous page
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Slice.html
