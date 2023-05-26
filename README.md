@@ -158,3 +158,19 @@ postgres:15
 ## Sorting dan Paging
 - Named Query di Repository tidak mendukung Sort
 - Namun mendukung Pageable (tanpa Sort), oleh karena itu kita harus menambahkan Sorting secara manual di Named Query nya
+
+## Query Annotation
+- Query Method cocok untuk kasus membuat jenis query yang tidak terlalu kompleks. Saat query terlalu kompleks dan parameter banyak, maka nama method bisa terlalu panjang jika menggunakan Query Method
+- Untungnya Spring Data JPA menyediakan membuat query menggunakan annotation Query, dimana kita bisa buat JPA QL atau Native Query
+- https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html 
+
+## Sort dan Paging
+- Query Annotation mendukung Sort dan Paging
+- Jadi kita bisa menggunakan parameter Sort atau Pageable pada Query Annotation
+
+## Page Result
+- Sebelumnya kita sempat bahas tentang Page Result ketika menggunakan Paging
+- Pada kasus jika kita ingin return dari Query Method nya adalah Page<T>, bukan List<T>, maka kita harus memberitahu Spring Data JPA bagaimana cara melakukan count query nya
+- Kita bisa tambahkan query count nya pada attribute countQuery di Query Annotation
+
+
