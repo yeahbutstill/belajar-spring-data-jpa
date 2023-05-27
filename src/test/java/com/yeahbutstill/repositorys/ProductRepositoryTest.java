@@ -2,10 +2,12 @@ package com.yeahbutstill.repositorys;
 
 import com.yeahbutstill.entitys.Category;
 import com.yeahbutstill.entitys.Product;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.support.TransactionOperations;
 
 import java.util.List;
@@ -266,6 +268,21 @@ class ProductRepositoryTest {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    @Test
+    void testSpecification() {
+        Specification<Product> productSpecification = (root, criteriaQuery, criteriaBuilder) -> {
+            return criteriaQuery.where(
+                    criteriaBuilder.or(
+                            criteriaBuilder.equal(root.get("name"), "Apple Iphone 13 Pro Max"),
+                            criteriaBuilder.equal(root.get("name"), "Apple Iphone 14 Pro Max")
+                    )
+            ).getRestriction();
+        };
+
+        List<Product> products = productRepository.findAll(productSpecification);
+        Assertions.assertEquals(10, products.size());
     }
 
 }

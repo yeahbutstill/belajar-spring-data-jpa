@@ -214,4 +214,13 @@ postgres:15
 - Example memiliki fitur Matcher, dimana kita bisa atur cara Example melakukan query
 - https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/ExampleMatcher.html 
 
-## 
+## Specification Executor
+- Di JPA, terdapat fitur Criteria untuk membuat Query secara dinamis
+- Hal ini bisa kita gunakan fitur Specification di Spring Data JPA
+- Untuk mendukung fitur ini, Repository yang kita buat harus extends JpaSpeficitaionExecutor, dimana terdapat banyak sekali method dengan parameter Specification
+- https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaSpecificationExecutor.html 
+
+## Specification
+- Specification adalah lambda yang bisa kita buat dengan mengembalikan data JPA Predicate seperti yang perah kita pelajari di kelas JPA 
+- Kita bisa mendapatkan detail dari Root, CriteriaQuery dan CriteriaBuilder di method toPredicate() milik Specification
+- https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/domain/Specification.html 
