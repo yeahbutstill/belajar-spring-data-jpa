@@ -200,3 +200,18 @@ postgres:15
 - Kita cukup gunakan annotation @CreatedDate dan @LastModifiedDate, dan menggunakan EntityListener AuditingEntityListener 
 - Kita bisa menggunakan tipe data Date, Timestamp, Instance atau Long (milis) untuk field audit nya 
 - Secara default, fitur ini tidak aktif, untuk mengaktifkannya, kita harus menambahkan annotation @EnableJpaAuditing
+
+## Example 
+- Spring Data JPA memiliki fitur Query by Example, dimana kita bisa membuat data object Entity, lalu meminta Spring Data JPA untuk membuat Query berdasarkan data example Entity yang kita buat
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Example.html 
+
+## Example Repository
+- JpaRepository memiliki parent interface QueryByExampleExecutor 
+- Dimana sudah disediakan banyak method yang bisa kita gunakan dengan parameter Example untuk mencari data
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/query/QueryByExampleExecutor.html 
+
+## Example Matcher
+- Example memiliki fitur Matcher, dimana kita bisa atur cara Example melakukan query
+- https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/ExampleMatcher.html 
+
+## 
