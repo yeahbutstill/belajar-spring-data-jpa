@@ -2,6 +2,8 @@ package com.yeahbutstill.repositorys;
 
 import com.yeahbutstill.entitys.Category;
 import com.yeahbutstill.entitys.Product;
+import com.yeahbutstill.model.ProductPrice;
+import com.yeahbutstill.model.SimpleProduct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -284,5 +286,16 @@ class ProductRepositoryTest {
         List<Product> products = productRepository.findAll(productSpecification);
         Assertions.assertEquals(10, products.size());
     }
+
+    @Test
+    void testProjection() {
+        List<SimpleProduct> products = productRepository.findAllByNameLike("%Apple%", SimpleProduct.class);
+        Assertions.assertEquals(10, products.size());
+
+        List<ProductPrice> productPrices = productRepository.findAllByNameLike("%Apple%", ProductPrice.class);
+        Assertions.assertEquals(10, productPrices.size());
+    }
+
+
 
 }

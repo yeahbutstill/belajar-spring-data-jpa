@@ -224,3 +224,20 @@ postgres:15
 - Specification adalah lambda yang bisa kita buat dengan mengembalikan data JPA Predicate seperti yang perah kita pelajari di kelas JPA 
 - Kita bisa mendapatkan detail dari Root, CriteriaQuery dan CriteriaBuilder di method toPredicate() milik Specification
 - https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/domain/Specification.html 
+
+## Projection
+- Saat kita belajar JPA, kita tahu terdapat fitur di JPA QL untuk memanggil constructor sebuah class, sehingga return hasil query bisa dalam bentuk class bukan Entity 
+- Di Spring, terdapat fitur bernama Projection, yang mirip namun lebih mudah 
+- Caranya di Repository, kita bisa buat Query Method dengan return Interface yang kita inginkan, secara otomatis nanti Spring Data akan melakukan mapping sesuai dengan field hasil Query dengan Interface return nya 
+- Yup, tidak salah mengetik, jadi kita harus buat dalam bentuk Interface, bukan Class 
+- Hal ini agar Spring Data tahu bahwa itu adalah projection
+
+## Java Record
+- Atau, jika sudah menggunakan versi Java 17, ada baiknya kita buat Projection dalam bentuk Java Record 
+- Bedanya dengan interface, saat menggunakan interface, maka Spring Data akan menggunakan Proxy (Reflection)
+- Sedangkan ketika menggunakan Java Record, akan dibuat instance nya secara otomatis
+
+## Dynamic Projection
+- Kadang kita mungkin ingin membuat beberapa jenis Projection Interface / Record 
+- Pada kasus ini, kita bisa menggunakan Generic di Query Method nya, dan juga menambahkan parameter Class di parameter terakhir Query Method nya
+

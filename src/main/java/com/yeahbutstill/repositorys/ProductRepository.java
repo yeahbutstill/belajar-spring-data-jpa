@@ -2,6 +2,7 @@ package com.yeahbutstill.repositorys;
 
 import com.yeahbutstill.entitys.Category;
 import com.yeahbutstill.entitys.Product;
+import com.yeahbutstill.model.SimpleProduct;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,8 @@ import java.util.stream.Stream;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
+
+    <T> List<T> findAllByNameLike(String name, Class<T> tClass);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Optional<Product> findFirstByIdEquals(Long id);
