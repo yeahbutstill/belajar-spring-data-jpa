@@ -48,4 +48,24 @@ class CategoryRepositoryTest {
         Assertions.assertEquals("GADGET MURAH", categoryList.get(0).getName());
     }
 
+    @Test
+    void testAudit() {
+        Category category = categoryRepository.findById(3004L).orElse(null);
+        Assertions.assertNotNull(category);
+        category.setName("GADGET COPETAN");
+        categoryRepository.save(category);
+        Assertions.assertNotNull(category.getLastModifiedDate());
+    }
+
+    @Test
+    void testAudit2() {
+        Category category = new Category();
+        category.setName("Sample Audit");
+        categoryRepository.save(category);
+
+        Assertions.assertNotNull(category.getId());
+        Assertions.assertNotNull(category.getCreatedDate());
+        Assertions.assertNotNull(category.getLastModifiedDate());
+    }
+
 }
